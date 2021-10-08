@@ -18,6 +18,7 @@ namespace Areas.Controllers
             _logger = logger;
         }
         
+        //Thanks to the default route set up, the app will go to this methd first and display the repective index
         public IActionResult Index()
         {
             return View();

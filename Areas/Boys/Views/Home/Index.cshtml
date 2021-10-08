@@ -6,9 +6,11 @@
 }
 
 <div class="text-center">
+    <!--Thanks to the ViewBag property defined in the controller class, we can utilize the custom greeting-->
     <h1 class="display-4">@ViewBag.Greeting</h1>
 
     <p>There are 16 Boys</p>
 
+    <!--In order to use the tag helpers to buyild the URL back to the default area, we import them in the area's _ViewImports file'-->
     <a asp-area="default" asp-controller="Home" asp-action="Index">Return to Classroom</a>
 </div>

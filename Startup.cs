@@ -12,6 +12,11 @@ using System.Threading.Tasks;
 
 namespace Areas
 {
+    /// <summary>
+    /// This is the class that will be used when the app will fire on startup.
+    /// The endpoints have been modified so that we can access 3 diffrent areas.
+    /// Each will supply the end user with a different page and the contents will also alter
+    /// </summary>
     public class Startup
     {
         public IWebHostEnvironment _env;
@@ -55,21 +60,25 @@ namespace Areas
 
             app.UseAuthorization();
 
+            //Configure the endpoiints to allow for the access to the areas folders
             app.UseEndpoints(endpoints =>
             {
+                //This route will supply the app with a path to the area called boys
                endpoints.MapAreaControllerRoute(
                     name: "boys",
                     areaName: "Boys",
                     pattern: "Boys/{controller=Home}/{action=Index}/{id?}"
                );
 
-               endpoints.MapAreaControllerRoute(
+                //This route will supply the app with a path to the area called girls
+                endpoints.MapAreaControllerRoute(
                     name: "girls",
                     areaName: "Girls",
                     pattern: "Girls/{controller=Home}/{action=Index}/{id?}"
                );
 
-               endpoints.MapAreaControllerRoute(
+                //This route will supply the app with a path to the area called teachers
+                endpoints.MapAreaControllerRoute(
                     name: "teachers",
                     areaName: "Teachers",
                     pattern: "Teachers/{controller=Home}/{action=Index}/{id?}"
