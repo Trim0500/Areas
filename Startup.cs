@@ -1,3 +1,4 @@
+using Areas.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,17 +14,25 @@ namespace Areas
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public IWebHostEnvironment _env;
 
-        public IConfiguration Configuration { get; }
+        public Startup(IWebHostEnvironment _env)
+        {
+            this._env = _env;
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            if (_env.IsProduction())
+            {
+                services.AddTransient<ICampusService, StudentsServiceImpl>();
+            }
+            else
+            {
+                services.AddTransient<ICampusService, TeachersServiceImpl>();
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
